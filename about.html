@@ -1,22 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About</title>
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      #image {
+        height: 200px;
+        width: 300px;
+        border: 1px solid #000;
+        text-align: center;
+        line-height: 200px;
+        background-size: cover;
+      }
+      .preview {
+        width: 100px;
+        margin: 5px;
+      }
+    </style>
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to Main Content</a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="about.html">About</a>
-    </nav>
-    <main id="main" class="about">
-      <h1>About This Site</h1>
-      <p>This is a basic multi-page site for HTML/CSS practice.</p>
-      <img src="img/about.jpg" alt="About Image" />
-    </main>
+    <h3 id="displayText">Hover over an image below to display here.</h3>
+    <div id="image">
+      <img
+        id="bigImage"
+        src=""
+        alt=""
+        style="width: 100%; height: 100%; object-fit: cover; display: none"
+      />
+    </div>
+    <img
+      class="preview"
+      src="img/5.jpg"
+      alt="Description 1"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+    />
+    <img
+      class="preview"
+      src="img/about.jpg"
+      alt="Description 2"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+    />
+    <img
+      class="preview"
+      src="img/home.jpg"
+      alt="Description 3"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+    />
+
+    <script>
+      function upDate(previewPic) {
+        console.log("upDate triggered!");
+        console.log("Alt text: " + previewPic.alt);
+        console.log("Source: " + previewPic.src);
+
+        // Change the text inside the <h3> tag
+        document.getElementById("displayText").innerHTML = previewPic.alt;
+
+        // Show the big image and change its src & alt
+        let bigImg = document.getElementById("bigImage");
+        bigImg.src = previewPic.src;
+        bigImg.alt = previewPic.alt;
+        bigImg.style.display = "block";
+      }
+
+      function undo() {
+        // Reset the text inside the <h3> tag
+        document.getElementById("displayText").innerHTML =
+          "Hover over an image below to display here.";
+
+        // Hide the big image
+        let bigImg = document.getElementById("bigImage");
+        bigImg.src = "";
+        bigImg.alt = "";
+        bigImg.style.display = "none";
+      }
+    </script>
   </body>
 </html>
