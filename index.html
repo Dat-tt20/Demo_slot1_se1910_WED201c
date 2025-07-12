@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
   <head>
+    <meta charset="UTF-8" />
+    <title>Interactive Photo Gallery</title>
     <style>
       #image {
         height: 200px;
@@ -26,38 +28,85 @@
         style="width: 100%; height: 100%; object-fit: cover; display: none"
       />
     </div>
+
+    <!-- 6 ảnh với alt text đầy đủ -->
     <img
       class="preview"
-      src="img/5.jpg"
-      alt="Description 1"
+      src="img/1.png"
+      alt="Phong cảnh núi đẹp"
       onmouseover="upDate(this)"
       onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
     />
     <img
       class="preview"
-      src="img/about.jpg"
-      alt="Description 2"
+      src="img/2.png"
+      alt="Bãi biển nắng"
       onmouseover="upDate(this)"
       onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
+    />
+    <img
+      class="preview"
+      src="img/3.png"
+      alt="Thành phố về đêm"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
+    />
+    <img
+      class="preview"
+      src="img/4.png"
+      alt="Cánh đồng hoa"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
     />
     <img
       class="preview"
       src="img/home.jpg"
-      alt="Description 3"
+      alt="Rừng mùa thu"
       onmouseover="upDate(this)"
       onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
+    />
+    <img
+      class="preview"
+      src="img/about.jpg"
+      alt="Sa mạc lúc hoàng hôn"
+      onmouseover="upDate(this)"
+      onmouseout="undo()"
+      onfocus="upDate(this)"
+      onblur="undo()"
     />
 
     <script>
+      // onload: khi trang load xong
+      window.addEventListener("load", function () {
+        console.log("Trang đã load – thêm tabindex");
+        addTabFocus();
+      });
+
+      function addTabFocus() {
+        // Lặp qua tất cả ảnh
+        let images = document.querySelectorAll(".preview");
+        for (let i = 0; i < images.length; i++) {
+          images[i].setAttribute("tabindex", "0");
+        }
+      }
+
       function upDate(previewPic) {
         console.log("upDate triggered!");
         console.log("Alt text: " + previewPic.alt);
         console.log("Source: " + previewPic.src);
 
-        // Change the text inside the <h3> tag
         document.getElementById("displayText").innerHTML = previewPic.alt;
 
-        // Show the big image and change its src & alt
         let bigImg = document.getElementById("bigImage");
         bigImg.src = previewPic.src;
         bigImg.alt = previewPic.alt;
@@ -65,11 +114,9 @@
       }
 
       function undo() {
-        // Reset the text inside the <h3> tag
         document.getElementById("displayText").innerHTML =
           "Hover over an image below to display here.";
 
-        // Hide the big image
         let bigImg = document.getElementById("bigImage");
         bigImg.src = "";
         bigImg.alt = "";
